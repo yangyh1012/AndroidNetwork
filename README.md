@@ -10,13 +10,21 @@
 ##先简要说说每个类或者接口的作用吧
 
 [TCNetworkString]()：定义一些常量，比如状态码，字符串操作，并弄一些加密方法等等。
+
 [TCNetworkConfig]()：定义了网络请求的配置项，比如超时设置、线上线下开关等网络配置信息。
+
 [TCNetworkServiceFactory]()：创建服务工厂，比如项目中用到多个URI的时候，需要使用这个。
+
 [TCNetworkServiceFactoryInterface]()：在MainActivity中实现此接口，注册服务类。
+
 [TCNetworkService]()：根据线上或者线下获取URI和版本号。
+
 [TCNetworkServiceInterface]()：业务继承此接口，定义URI、版本号、参数和请求失败返回的统一处理。
+
 [TCNetworkManageRequestInterface]()：定义请求参数，成功返回处理和失败返回处理。
+
 [TCNetworkManageInterface]()：定义服务类、API类名、API方法名。
+
 [TCNetworkManage]()：请求主类，获取参数、服务、方法等等发起请求，然后统一返回。
 
 ## 如何使用？
