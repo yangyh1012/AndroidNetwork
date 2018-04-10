@@ -81,15 +81,20 @@ public class TCNetworkManage {
                 + "调用方法：" + networkManageInterface.apiMethodName() + "\n"
                 + "封装后的参数：" + Arrays.toString(mapParamValue.entrySet().toArray()) + "\n");
 
-        OkHttpClient client = new OkHttpClient.Builder()
-                .connectTimeout(TCNetworkConfig.getInstance().timeoutSeconds,TimeUnit.SECONDS) //设置连接超时
-                .build();
+        Retrofit retrofit = null;
+        if (TCNetworkConfig.getInstance().retrofitMap.get(url) == null) {
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .client(client)
-                .baseUrl(url)
-                .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().create()))
-                .build();
+            retrofit = new Retrofit.Builder()
+                    .client(TCNetworkConfig.getInstance().client)
+                    .baseUrl(url)
+                    .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().create()))
+                    .build();
+
+            TCNetworkConfig.getInstance().retrofitMap.put(url, retrofit);
+        } else {
+
+            retrofit = (Retrofit)TCNetworkConfig.getInstance().retrofitMap.get(url);
+        }
 
         Class interfaceService = null;
         Object service = null;
